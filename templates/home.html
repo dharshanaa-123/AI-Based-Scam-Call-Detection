@@ -1,0 +1,1084 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    /* =========================================
+       PASTEL AURORA HOME
+       ========================================= */
+
+    .home-page {
+        padding: 5px 0 35px;
+    }
+
+    /* =========================================
+       HERO
+       ========================================= */
+
+    .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 245px;
+        border-radius: 30px;
+        padding: 34px 38px;
+        margin-bottom: 24px;
+
+        background:
+            radial-gradient(circle at 80% 20%,
+                rgba(190, 183, 255, 0.55),
+                transparent 30%),
+
+            radial-gradient(circle at 95% 90%,
+                rgba(255, 190, 222, 0.48),
+                transparent 32%),
+
+            radial-gradient(circle at 20% 100%,
+                rgba(171, 235, 213, 0.38),
+                transparent 35%),
+
+            linear-gradient(
+                135deg,
+                #f0edff,
+                #e9f5ff 50%,
+                #fff0f8
+            );
+
+        border: 1px solid rgba(130,110,190,0.12);
+
+        box-shadow:
+            0 18px 45px rgba(85,70,140,0.10);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        max-width: 58%;
+    }
+
+    .hero-label {
+        display: inline-block;
+        padding: 7px 13px;
+        border-radius: 20px;
+
+        background: rgba(255,255,255,0.65);
+
+        color: #6c61ad;
+
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+    }
+
+    .hero h1 {
+        margin: 15px 0 9px;
+
+        font-size: 34px;
+        line-height: 1.15;
+
+        color: #29264c;
+    }
+
+    .hero p {
+        margin: 0;
+
+        max-width: 520px;
+
+        color: #67657b;
+
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    .hero-button {
+        display: inline-block;
+
+        margin-top: 20px;
+        padding: 11px 18px;
+
+        border-radius: 14px;
+
+        background: rgba(255,255,255,0.78);
+
+        color: #5e55a4;
+
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        box-shadow: 0 7px 20px rgba(80,70,130,0.10);
+    }
+
+    /* =========================================
+       HERO ILLUSTRATION
+       ========================================= */
+
+    .hero-art {
+        position: absolute;
+
+        right: 35px;
+        top: 24px;
+
+        width: 245px;
+        height: 195px;
+
+        z-index: 2;
+    }
+
+    .phone-card {
+        position: absolute;
+
+        left: 55px;
+        top: 18px;
+
+        width: 105px;
+        height: 155px;
+
+        border-radius: 23px;
+
+        background: rgba(255,255,255,0.82);
+
+        border: 5px solid rgba(255,255,255,0.8);
+
+        box-shadow:
+            0 18px 35px rgba(80,70,130,0.18);
+
+        transform: rotate(-6deg);
+    }
+
+    .phone-screen {
+        position: absolute;
+
+        inset: 8px;
+
+        border-radius: 17px;
+
+        background:
+            linear-gradient(
+                160deg,
+                #e9e5ff,
+                #e8f7ff,
+                #fff0f8
+            );
+    }
+
+    .phone-speaker {
+        position: absolute;
+
+        top: 8px;
+        left: 39px;
+
+        width: 25px;
+        height: 4px;
+
+        border-radius: 5px;
+
+        background: #b4aecb;
+    }
+
+    .phone-shield {
+        position: absolute;
+
+        left: 30px;
+        top: 48px;
+
+        width: 45px;
+        height: 52px;
+
+        background: linear-gradient(
+            145deg,
+            #8d83e8,
+            #78b8ed
+        );
+
+        clip-path: polygon(
+            50% 0%,
+            90% 16%,
+            86% 62%,
+            50% 100%,
+            14% 62%,
+            10% 16%
+        );
+    }
+
+    .phone-check {
+        position: absolute;
+
+        left: 44px;
+        top: 68px;
+
+        color: white;
+
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    .warning-bubble {
+        position: absolute;
+
+        right: 15px;
+        top: 15px;
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        background: #fff0b9;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 29px;
+
+        box-shadow:
+            0 12px 25px rgba(160,120,60,0.14);
+
+        transform: rotate(7deg);
+    }
+
+    .ai-bubble {
+        position: absolute;
+
+        right: 0;
+        bottom: 20px;
+
+        padding: 9px 13px;
+
+        border-radius: 15px;
+
+        background: rgba(255,255,255,0.84);
+
+        color: #655da1;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        box-shadow:
+            0 10px 25px rgba(80,70,130,0.12);
+    }
+
+    .signal {
+        position: absolute;
+
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #91d9c0;
+    }
+
+    .signal.one {
+        left: 10px;
+        top: 35px;
+    }
+
+    .signal.two {
+        left: 22px;
+        top: 58px;
+
+        background: #e99fc1;
+    }
+
+    .signal.three {
+        left: 5px;
+        bottom: 25px;
+
+        background: #aaa1ee;
+    }
+
+
+    /* =========================================
+       STATISTICS
+       ========================================= */
+
+    .stats-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 16px;
+
+        margin-bottom: 24px;
+    }
+
+    .stat-card {
+        position: relative;
+
+        overflow: hidden;
+
+        padding: 20px;
+
+        border-radius: 22px;
+
+        background:
+            rgba(255,255,255,0.84);
+
+        border:
+            1px solid rgba(140,130,180,0.12);
+
+        box-shadow:
+            0 10px 30px rgba(70,60,110,0.07);
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 15px 35px rgba(70,60,110,0.11);
+    }
+
+    .stat-icon {
+        width: 43px;
+        height: 43px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 14px;
+
+        font-size: 21px;
+
+        margin-bottom: 13px;
+    }
+
+    .icon-purple {
+        background: #ece8ff;
+    }
+
+    .icon-pink {
+        background: #ffe7f1;
+    }
+
+    .icon-blue {
+        background: #e3f2ff;
+    }
+
+    .icon-green {
+        background: #e1f7ee;
+    }
+
+    .stat-card h2 {
+        margin: 0;
+
+        font-size: 27px;
+
+        color: #302d50;
+    }
+
+    .stat-card p {
+        margin: 5px 0 0;
+
+        font-size: 12px;
+
+        color: #77748a;
+    }
+
+    .stat-decoration {
+        position: absolute;
+
+        right: -18px;
+        bottom: -18px;
+
+        width: 70px;
+        height: 70px;
+
+        border-radius: 50%;
+
+        background: rgba(220,215,255,0.4);
+    }
+
+
+    /* =========================================
+       RECENT ANALYSIS
+       ========================================= */
+
+    .section-card {
+        padding: 24px;
+
+        border-radius: 25px;
+
+        background:
+            rgba(255,255,255,0.84);
+
+        border:
+            1px solid rgba(140,130,180,0.12);
+
+        box-shadow:
+            0 12px 32px rgba(70,60,110,0.07);
+    }
+
+    .section-title {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 20px;
+    }
+
+    .section-title h3 {
+        margin: 0;
+
+        color: #302d50;
+    }
+
+    .section-title span {
+        font-size: 12px;
+        color: #8a8798;
+    }
+
+    .analysis-layout {
+        display: grid;
+
+        grid-template-columns: 1fr 170px;
+
+        gap: 20px;
+
+        align-items: center;
+    }
+
+    .recent-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 11px;
+    }
+
+    .recent-item {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 13px 15px;
+
+        border-radius: 15px;
+
+        background: #f8f7fc;
+    }
+
+    .recent-left {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+    }
+
+    .recent-icon {
+        width: 36px;
+        height: 36px;
+
+        border-radius: 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #ece9ff;
+
+        font-size: 17px;
+    }
+
+    .recent-name {
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: #403c5c;
+    }
+
+    .recent-date {
+        margin-top: 3px;
+
+        font-size: 10px;
+
+        color: #92909c;
+    }
+
+    .risk-badge {
+        padding: 6px 10px;
+
+        border-radius: 20px;
+
+        font-size: 10px;
+
+        font-weight: 800;
+    }
+
+    .badge-high {
+        background: #ffe2e6;
+        color: #c83d52;
+    }
+
+    .badge-medium {
+        background: #fff0d9;
+        color: #b56d21;
+    }
+
+    .badge-low {
+        background: #def6eb;
+        color: #28845b;
+    }
+
+
+    /* =========================================
+       SMALL PROJECT ILLUSTRATION
+       ========================================= */
+
+    .project-art {
+        height: 160px;
+
+        border-radius: 22px;
+
+        background:
+            linear-gradient(
+                145deg,
+                #eeeaff,
+                #e7f5ff 55%,
+                #fff0f7
+            );
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+    .project-art::before,
+    .project-art::after {
+        content: "";
+
+        position: absolute;
+
+        border-radius: 50%;
+
+        filter: blur(2px);
+    }
+
+    .project-art::before {
+        width: 100px;
+        height: 100px;
+
+        background: rgba(180,170,255,0.25);
+
+        top: -35px;
+        right: -25px;
+    }
+
+    .project-art::after {
+        width: 80px;
+        height: 80px;
+
+        background: rgba(255,180,215,0.22);
+
+        bottom: -25px;
+        left: -15px;
+    }
+
+    .mini-shield {
+        width: 68px;
+        height: 78px;
+
+        position: relative;
+
+        background:
+            linear-gradient(
+                145deg,
+                #8f84e8,
+                #75b9ed
+            );
+
+        clip-path:
+            polygon(
+                50% 0%,
+                91% 16%,
+                87% 63%,
+                50% 100%,
+                13% 63%,
+                9% 16%
+            );
+
+        z-index: 2;
+    }
+
+    .mini-shield::after {
+        content: "✓";
+
+        position: absolute;
+
+        left: 22px;
+        top: 20px;
+
+        color: white;
+
+        font-size: 27px;
+        font-weight: bold;
+    }
+
+    .mini-phone {
+        position: absolute;
+
+        width: 48px;
+        height: 76px;
+
+        right: 28px;
+        bottom: 25px;
+
+        border-radius: 12px;
+
+        background: rgba(255,255,255,0.82);
+
+        border: 3px solid white;
+
+        transform: rotate(10deg);
+
+        box-shadow:
+            0 8px 18px rgba(70,70,130,0.13);
+    }
+
+    .mini-wave {
+        position: absolute;
+
+        left: 20px;
+        bottom: 24px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 3px;
+    }
+
+    .mini-wave span {
+        width: 3px;
+
+        border-radius: 4px;
+
+        background: #a49ae8;
+    }
+
+    .mini-wave span:nth-child(1) {
+        height: 10px;
+    }
+
+    .mini-wave span:nth-child(2) {
+        height: 20px;
+    }
+
+    .mini-wave span:nth-child(3) {
+        height: 32px;
+    }
+
+    .mini-wave span:nth-child(4) {
+        height: 18px;
+    }
+
+    .mini-wave span:nth-child(5) {
+        height: 27px;
+    }
+
+
+    /* =========================================
+       EMPTY STATE
+       ========================================= */
+
+    .empty {
+        text-align: center;
+
+        padding: 28px;
+
+        color: #858293;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 1000px) {
+
+        .stats-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+        .hero-content {
+            max-width: 62%;
+        }
+
+        .hero-art {
+            right: 10px;
+            transform: scale(.85);
+        }
+    }
+
+
+    @media (max-width: 700px) {
+
+        .hero {
+            padding: 25px;
+        }
+
+        .hero-content {
+            max-width: 100%;
+        }
+
+        .hero-art {
+            opacity: .18;
+            right: -15px;
+        }
+
+        .hero h1 {
+            font-size: 27px;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .analysis-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .project-art {
+            display: none;
+        }
+    }
+
+</style>
+
+<div class="home-page">
+
+```
+<!-- =========================================
+     HERO
+     ========================================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            AI • MACHINE LEARNING • CYBER SECURITY
+        </span>
+
+        <h1>
+            AI-Based Scam Call Detection
+        </h1>
+
+        <p>
+            Analyze suspicious call conversations using
+            machine learning and identify potential scam
+            activity through text and behavioral patterns.
+        </p>
+
+        <a
+            href="/analyze"
+            class="hero-button"
+        >
+            🔍 Analyze a Call
+        </a>
+
+    </div>
+
+
+    <!-- PROJECT ILLUSTRATION -->
+
+    <div class="hero-art">
+
+        <div class="signal one"></div>
+        <div class="signal two"></div>
+        <div class="signal three"></div>
+
+        <div class="phone-card">
+
+            <div class="phone-screen"></div>
+
+            <div class="phone-speaker"></div>
+
+            <div class="phone-shield"></div>
+
+            <div class="phone-check">
+                ✓
+            </div>
+
+        </div>
+
+
+        <div class="warning-bubble">
+            ⚠️
+        </div>
+
+
+        <div class="ai-bubble">
+            AI RISK ANALYSIS
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     STATISTICS
+     ========================================= -->
+
+<div class="stats-grid">
+
+
+    <!-- TOTAL -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon icon-purple">
+            📞
+        </div>
+
+        <h2>
+            {{ stats.total }}
+        </h2>
+
+        <p>
+            Total Calls Analyzed
+        </p>
+
+        <div class="stat-decoration"></div>
+
+    </div>
+
+
+    <!-- SCAM -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon icon-pink">
+            🚨
+        </div>
+
+        <h2>
+            {{ stats.scam }}
+        </h2>
+
+        <p>
+            Potential Scams Detected
+        </p>
+
+        <div
+            class="stat-decoration"
+            style="background:#ffdce7;"
+        ></div>
+
+    </div>
+
+
+    <!-- GENUINE -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon icon-green">
+            🛡️
+        </div>
+
+        <h2>
+            {{ stats.genuine }}
+        </h2>
+
+        <p>
+            Genuine Calls
+        </p>
+
+        <div
+            class="stat-decoration"
+            style="background:#dff5ea;"
+        ></div>
+
+    </div>
+
+
+    <!-- HIGH RISK -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon icon-blue">
+            ⚠️
+        </div>
+
+        <h2>
+            {{ stats.high }}
+        </h2>
+
+        <p>
+            High Risk Detections
+        </p>
+
+        <div
+            class="stat-decoration"
+            style="background:#dceeff;"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     RECENT ANALYSIS
+     ========================================= -->
+
+<div class="section-card">
+
+    <div class="section-title">
+
+        <div>
+
+            <div class="muted">
+                ACTIVITY
+            </div>
+
+            <h3>
+                Recent Analysis
+            </h3>
+
+        </div>
+
+        <span>
+            Latest detections
+        </span>
+
+    </div>
+
+
+    <div class="analysis-layout">
+
+
+        <!-- RECENT LIST -->
+
+        <div class="recent-list">
+
+            {% if recent %}
+
+                {% for item in recent %}
+
+                    <div class="recent-item">
+
+                        <div class="recent-left">
+
+                            <div class="recent-icon">
+
+                                {% if item.prediction == "SCAM" %}
+                                    🚨
+                                {% else %}
+                                    🛡️
+                                {% endif %}
+
+                            </div>
+
+                            <div>
+
+                                <div class="recent-name">
+
+                                    {{ item.filename }}
+
+                                </div>
+
+                                <div class="recent-date">
+
+                                    {{ item.date }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            {% if item.risk_level == "HIGH" %}
+
+                                <span class="risk-badge badge-high">
+                                    HIGH
+                                </span>
+
+                            {% elif item.risk_level == "MEDIUM" %}
+
+                                <span class="risk-badge badge-medium">
+                                    MEDIUM
+                                </span>
+
+                            {% else %}
+
+                                <span class="risk-badge badge-low">
+                                    LOW
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+
+                    📞 No calls analyzed yet.
+
+                    <br>
+
+                    Upload an audio file to begin AI analysis.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- SMALL PROJECT IMAGE -->
+
+        <div class="project-art">
+
+            <div class="mini-shield"></div>
+
+            <div class="mini-phone"></div>
+
+            <div class="mini-wave">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

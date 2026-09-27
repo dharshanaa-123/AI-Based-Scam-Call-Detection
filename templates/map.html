@@ -1,0 +1,794 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    .risk-page {
+        padding: 10px 0 30px;
+    }
+
+    .risk-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 22px;
+    }
+
+    .risk-header h2 {
+        margin: 4px 0;
+        font-size: 30px;
+    }
+
+    .risk-header p {
+        margin: 0;
+        color: #777;
+    }
+
+    .shield-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        background: linear-gradient(135deg, #dcd6ff, #c9e8ff);
+        box-shadow: 0 8px 25px rgba(100, 90, 180, 0.15);
+    }
+
+
+    /* =========================
+       SUMMARY CARDS
+       ========================= */
+
+    .risk-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .risk-card {
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.82);
+        border: 1px solid rgba(150,150,200,0.15);
+        box-shadow: 0 10px 28px rgba(60,50,100,0.08);
+    }
+
+    .risk-card-icon {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .risk-card h3 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .risk-card p {
+        margin: 4px 0 0;
+        color: #777;
+        font-size: 13px;
+    }
+
+    .risk-card::after {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        right: -30px;
+        bottom: -35px;
+        background: rgba(255,255,255,0.45);
+    }
+
+
+    /* =========================
+       MAIN GRID
+       ========================= */
+
+    .risk-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+    }
+
+    .risk-box {
+        background: rgba(255,255,255,0.84);
+        border: 1px solid rgba(150,150,200,0.15);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 12px 32px rgba(60,50,100,0.08);
+    }
+
+    .risk-box h3 {
+        margin-top: 0;
+        margin-bottom: 18px;
+    }
+
+
+    /* =========================
+       OVERALL RISK
+       ========================= */
+
+    .overall {
+        text-align: center;
+    }
+
+    .risk-ring {
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        margin: 10px auto 20px;
+        background:
+            conic-gradient(
+                #ef6b78 0deg,
+                #ef6b78 calc(var(--risk) * 3.6deg),
+                #eceaf4 calc(var(--risk) * 3.6deg),
+                #eceaf4 360deg
+            );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .risk-ring::before {
+        content: "";
+        position: absolute;
+        width: 145px;
+        height: 145px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .risk-number {
+        position: relative;
+        z-index: 2;
+    }
+
+    .risk-number strong {
+        display: block;
+        font-size: 34px;
+    }
+
+    .risk-number span {
+        font-size: 13px;
+        color: #777;
+    }
+
+    .risk-status {
+        display: inline-block;
+        padding: 9px 18px;
+        border-radius: 30px;
+        background: #ffe1e5;
+        color: #c9364d;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       DISTRIBUTION
+       ========================= */
+
+    .distribution-row {
+        margin-bottom: 18px;
+    }
+
+    .distribution-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 7px;
+        font-size: 14px;
+    }
+
+    .distribution-bar {
+        height: 12px;
+        background: #eeeef5;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .distribution-fill {
+        height: 100%;
+        border-radius: 20px;
+    }
+
+    .high-fill {
+        background: linear-gradient(90deg, #ff7c88, #ef5264);
+    }
+
+    .medium-fill {
+        background: linear-gradient(90deg, #ffc477, #f5a84b);
+    }
+
+    .low-fill {
+        background: linear-gradient(90deg, #8bd8b5, #55bd91);
+    }
+
+
+    /* =========================
+       LATEST DETECTION
+       ========================= */
+
+    .latest {
+        margin-top: 20px;
+    }
+
+    .latest-status {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        border-radius: 18px;
+        background: linear-gradient(
+            135deg,
+            rgba(255,225,230,0.7),
+            rgba(235,228,255,0.7)
+        );
+    }
+
+    .latest-image {
+        width: 55px;
+        height: 55px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 27px;
+        background: white;
+        box-shadow: 0 6px 18px rgba(80,60,100,0.1);
+    }
+
+    .latest-status strong {
+        display: block;
+        font-size: 17px;
+    }
+
+    .latest-status span {
+        color: #777;
+        font-size: 13px;
+    }
+
+
+    /* =========================
+       INDICATORS
+       ========================= */
+
+    .indicator-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+    }
+
+    .indicator {
+        padding: 9px 13px;
+        border-radius: 30px;
+        background: #f1efff;
+        color: #6258a8;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .indicator.red {
+        background: #ffe3e6;
+        color: #c33e50;
+    }
+
+    .indicator.orange {
+        background: #fff0dc;
+        color: #b66a1e;
+    }
+
+
+    /* =========================
+       SAFETY STATUS
+       ========================= */
+
+    .safety-box {
+        margin-top: 20px;
+        padding: 22px;
+        border-radius: 22px;
+        background: linear-gradient(
+            135deg,
+            #e8f8f1,
+            #e8efff,
+            #f8eaff
+        );
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .safety-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 17px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 27px;
+        box-shadow: 0 7px 20px rgba(80,80,120,0.1);
+    }
+
+    .safety-box h3 {
+        margin: 0 0 5px;
+    }
+
+    .safety-box p {
+        margin: 0;
+        color: #666;
+        font-size: 13px;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 900px) {
+
+        .risk-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .risk-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 550px) {
+
+        .risk-cards {
+            grid-template-columns: 1fr;
+        }
+
+        .risk-header {
+            align-items: flex-start;
+        }
+    }
+
+</style>
+
+<div class="risk-page">
+
+```
+<!-- =========================
+     HEADER
+     ========================= -->
+
+<div class="risk-header">
+
+    <div>
+        <div class="muted">SECURITY OVERVIEW</div>
+
+        <h2>Risk Map</h2>
+
+        <p>
+            AI-powered risk distribution of analyzed calls
+        </p>
+    </div>
+
+    <div class="shield-icon">
+        🛡️
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUMMARY CARDS
+     ========================= -->
+
+<div class="risk-cards">
+
+    <div class="risk-card">
+
+        <div class="risk-card-icon">
+            🔴
+        </div>
+
+        <h3>
+            {{ stats.high }}
+        </h3>
+
+        <p>
+            High Risk Calls
+        </p>
+
+    </div>
+
+
+    <div class="risk-card">
+
+        <div class="risk-card-icon">
+            🟠
+        </div>
+
+        <h3>
+            {{ stats.medium }}
+        </h3>
+
+        <p>
+            Medium Risk Calls
+        </p>
+
+    </div>
+
+
+    <div class="risk-card">
+
+        <div class="risk-card-icon">
+            🟢
+        </div>
+
+        <h3>
+            {{ stats.low }}
+        </h3>
+
+        <p>
+            Low Risk Calls
+        </p>
+
+    </div>
+
+
+    <div class="risk-card">
+
+        <div class="risk-card-icon">
+            📞
+        </div>
+
+        <h3>
+            {{ stats.total }}
+        </h3>
+
+        <p>
+            Total Analyses
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN CONTENT
+     ========================= -->
+
+<div class="risk-grid">
+
+
+    <!-- OVERALL RISK -->
+
+    <div class="risk-box overall">
+
+        <h3>
+            Overall Risk Level
+        </h3>
+
+        {% if stats.total > 0 %}
+
+            {% set overall_risk =
+                ((stats.high * 85) +
+                 (stats.medium * 55) +
+                 (stats.low * 20))
+                / stats.total
+            %}
+
+            {% set overall_risk = overall_risk|round(1) %}
+
+        {% else %}
+
+            {% set overall_risk = 0 %}
+
+        {% endif %}
+
+
+        <div
+            class="risk-ring"
+            style="--risk: {{ overall_risk }}"
+        >
+
+            <div class="risk-number">
+
+                <strong>
+                    {{ overall_risk }}%
+                </strong>
+
+                <span>
+                    Risk Score
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% if overall_risk >= 70 %}
+
+            <div class="risk-status">
+                🔴 HIGH RISK
+            </div>
+
+        {% elif overall_risk >= 40 %}
+
+            <div class="risk-status"
+                 style="background:#fff0dc;color:#b66a1e;">
+                🟠 MEDIUM RISK
+            </div>
+
+        {% else %}
+
+            <div class="risk-status"
+                 style="background:#e0f7eb;color:#25855a;">
+                🟢 LOW RISK
+            </div>
+
+        {% endif %}
+
+
+        <p style="margin-top:16px;color:#777;font-size:13px;">
+
+            Combined view of analyzed call risk levels.
+
+        </p>
+
+    </div>
+
+
+    <!-- RISK DISTRIBUTION -->
+
+    <div class="risk-box">
+
+        <h3>
+            📊 Risk Distribution
+        </h3>
+
+
+        {% if stats.total > 0 %}
+
+            {% set high_percent =
+                (stats.high / stats.total * 100)|round(1)
+            %}
+
+            {% set medium_percent =
+                (stats.medium / stats.total * 100)|round(1)
+            %}
+
+            {% set low_percent =
+                (stats.low / stats.total * 100)|round(1)
+            %}
+
+        {% else %}
+
+            {% set high_percent = 0 %}
+            {% set medium_percent = 0 %}
+            {% set low_percent = 0 %}
+
+        {% endif %}
+
+
+        <!-- HIGH -->
+
+        <div class="distribution-row">
+
+            <div class="distribution-top">
+
+                <span>
+                    🔴 High
+                </span>
+
+                <b>
+                    {{ stats.high }}
+                </b>
+
+            </div>
+
+            <div class="distribution-bar">
+
+                <div
+                    class="distribution-fill high-fill"
+                    style="width:{{ high_percent }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MEDIUM -->
+
+        <div class="distribution-row">
+
+            <div class="distribution-top">
+
+                <span>
+                    🟠 Medium
+                </span>
+
+                <b>
+                    {{ stats.medium }}
+                </b>
+
+            </div>
+
+            <div class="distribution-bar">
+
+                <div
+                    class="distribution-fill medium-fill"
+                    style="width:{{ medium_percent }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOW -->
+
+        <div class="distribution-row">
+
+            <div class="distribution-top">
+
+                <span>
+                    🟢 Low
+                </span>
+
+                <b>
+                    {{ stats.low }}
+                </b>
+
+            </div>
+
+            <div class="distribution-bar">
+
+                <div
+                    class="distribution-fill low-fill"
+                    style="width:{{ low_percent }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEGEND -->
+
+        <div style="
+            margin-top:25px;
+            padding-top:18px;
+            border-top:1px solid #eee;
+            color:#777;
+            font-size:12px;
+        ">
+
+            🔴 High = Immediate attention<br><br>
+
+            🟠 Medium = Suspicious activity<br><br>
+
+            🟢 Low = Low detected risk
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     LATEST DETECTION
+     ========================= -->
+
+{% if stats.total > 0 %}
+
+    {% set latest = stats %}
+
+    <div class="risk-box latest">
+
+        <h3>
+            🚨 Latest Security Overview
+        </h3>
+
+        <div class="latest-status">
+
+            <div class="latest-image">
+                🛡️
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ scam_count }} potential scam calls detected
+                </strong>
+
+                <span>
+                    {{ genuine_count }} calls classified as genuine
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endif %}
+
+
+<!-- =========================
+     DETECTED INDICATORS
+     ========================= -->
+
+<div class="risk-box" style="margin-top:20px;">
+
+    <h3>
+        🔍 Common Scam Indicators
+    </h3>
+
+    <div class="indicator-list">
+
+        <div class="indicator red">
+            OTP / Verification Request
+        </div>
+
+        <div class="indicator red">
+            Money / Banking Request
+        </div>
+
+        <div class="indicator orange">
+            Urgent Language
+        </div>
+
+        <div class="indicator">
+            Account Blocking Threat
+        </div>
+
+        <div class="indicator">
+            Suspicious Payment Request
+        </div>
+
+        <div class="indicator">
+            Identity / KYC Request
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SAFETY STATUS
+     ========================= -->
+
+<div class="safety-box">
+
+    <div class="safety-icon">
+        🛡️
+    </div>
+
+    <div>
+
+        <h3>
+            Safety Status
+        </h3>
+
+        <p>
+            AI analysis helps identify suspicious call patterns.
+            Never share OTPs, PINs, passwords or banking credentials
+            during an unexpected call.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}
