@@ -1,0 +1,129 @@
+[
+    {
+        "filename": "next_test.wav",
+        "date": "17 Sep 2026, 12:19 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "next_test.wav",
+        "date": "17 Sep 2026, 12:20 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "17 Sep 2026, 08:04 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "17 Sep 2026, 08:20 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "18 Sep 2026, 07:34 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0
+    },
+    {
+        "filename": "next_test.wav",
+        "date": "18 Sep 2026, 07:35 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "18 Sep 2026, 07:35 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0
+    },
+    {
+        "filename": "next_test.wav",
+        "date": "18 Sep 2026, 07:36 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "next_test.wav",
+        "date": "18 Sep 2026, 07:36 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "tamil_test_short.wav",
+        "date": "18 Sep 2026, 07:37 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 21.53,
+        "text_score": 35.22,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "next_test.wav",
+        "date": "18 Sep 2026, 07:39 PM",
+        "prediction": "GENUINE",
+        "risk_level": "LOW",
+        "final_score": 25.64,
+        "text_score": 42.06,
+        "behavior_score": 1.0
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "18 Sep 2026, 07:49 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0,
+        "text": "Here bank account is blocked please give me your OTP immediately.",
+        "indicators": [
+            "OTP / Verification Request",
+            "Urgent Language"
+        ]
+    },
+    {
+        "filename": "scam_call_test.wav",
+        "date": "27 Sep 2026, 02:17 PM",
+        "prediction": "SCAM",
+        "risk_level": "HIGH",
+        "final_score": 86.48,
+        "text_score": 86.14,
+        "behavior_score": 87.0,
+        "text": "Here bank account is blocked please give me your OTP immediately.",
+        "indicators": [
+            "OTP / Verification Request",
+            "Urgent Language"
+        ]
+    }
+]
